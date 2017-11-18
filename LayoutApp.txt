@@ -1,0 +1,20 @@
+Tela inicial
+- Lista do tipo Slides com dicas de uso e regras do bar, cancelamento, promoções, etc...
+	- http://ionicframework.com/docs/components/#slides
+
+Tela de login
+- Centralizar imagem
+	- Procurar layout em css na internet
+
+- Lista de produtos
+	- http://ionicframework.com/docs/v1/components/#grid-vertically-align
+
+- Header(Cabeçalho)
+	- http://ionicframework.com/docs/v1/components/#clear-buttons-headers
+
+- Footer(Confirmação de pedido)
+	- http://ionicframework.com/docs/v1/components/#footer
+- Header de procura
+	- http://ionicframework.com/docs/v1/components/#bar-inputs
+- Cadastro de produto
+	- http://ionicframework.com/docs/v1/components/#forms-stacked-labels

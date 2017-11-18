@@ -1,0 +1,53 @@
+<ion-side-menus>
+    
+    <ion-side-menu-content ng-controller="IndexCtrl">
+        <ion-nav-bar class="bar-energized">
+            <!-- <ion-nav-back-button class="button-icon ion-arrow-left-c">
+            </ion-nav-back-button> -->
+        
+            <ion-nav-buttons side="Right">
+            <button class="button button-icon button-clear ion-navicon" ng-click="showMenu()">
+            </button>
+            </ion-nav-buttons>
+        </ion-nav-bar>
+        <ion-nav-view animation="slide-left-right" name="conteudo">
+
+        </ion-nav-view>
+    </ion-side-menu-content> 
+
+    <ion-side-menu side="right" >  
+
+        <ion-content has-header="true">
+          <div class="list">
+            <a class="item item-icon-left" menu-close href="#/login">
+              <i class="icon ion-beer"></i>
+              Home
+            </a>
+
+            <a class="item item-icon-left" menu-close href="#/menu/listaProdutos" >
+              <i class="icon ion-ios-list-outline"></i>
+              Menu
+            </a>
+
+            <a class="item item-icon-left" menu-close href="#/menu/mesa">
+              <i class="icon ion-cash"></i>
+              Conta
+            </a>
+
+            <a class="item item-icon-left" menu-close href="#/menu/cadastroProdutos" ng-if="(usuario.tipo != 'cliente')">
+              <i class="icon ion-add-circle" ></i>
+              Cadastro de produtos
+            </a>
+            <a class="item item-icon-left" menu-close href="#/registro" >
+              <i class="icon ion-person-add" ></i>
+              Novo usuário
+            </a>
+
+            <a class="item item-icon-left" menu-close href="#/login" ng-click="sair(user)">
+              <i class="icon ion-power"></i>
+              Sair
+            </a>
+          </div>
+        </ion-content>
+    </ion-side-menu>
+  </ion-side-menus>

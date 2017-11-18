@@ -1,0 +1,29 @@
+<ion-view title="Conta">
+        
+        
+    <ion-content>
+        <ion-list>
+            
+            <label class = "item item-input">
+                <input type="text" placeholder="Pesquisar" ng-model="pesquisa.descricao">
+            </label>
+            
+            <ion-item class = "item item-input" ng-click="" ng-repeat="pedido in pedidos | filter : pesquisa | orderBy: 'descricao'" >
+                <!-- <img src={{produto.imagem}} /> -->
+                <h2>Produto: {{itempedido.nomeproduto}}</h2>
+                <p>Quantidade: {{itempedido.quantidade}} </p>
+                <p>Preço: {{itempedido.precototal}} </p>
+                <ion-option-button class="button-assertive" ng-click="excluir(produto.$id)">
+                    Excluir
+                </ion-option-button>
+            </ion-item> 
+        </ion-list>
+        <div class="list">
+            <button class="button button-full button-energized">
+                Fechar a conta
+            </button>
+        </div>
+
+    </ion-content>
+        
+</ion-view>

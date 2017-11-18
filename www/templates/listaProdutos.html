@@ -1,0 +1,29 @@
+<ion-view title="Produtos">
+
+    <ion-content>
+        <label class="item item-input">
+            <input type="text" placeholder="Pesquisar" ng-model="pesquisa.descricao">
+        </label>
+
+        <div class="list " ng-click="" ng-repeat="produto in produtos | filter : pesquisa | orderBy: 'descricao'">
+            <a class="item item-thumbnail-left">
+                <img src={{produto.imagem}} >
+                <h2>{{produto.descricao}}</h2>
+                <p>Estoque: {{produto.estoque}} </p>
+                <p>Preço: {{produto.preco}} </p>
+            </a>
+        </div>
+        <!-- <ion-list>   
+            <ion-item class = "item item-input" ng-click="" ng-repeat="produto in produtos | filter : pesquisa | orderBy: 'descricao'" >
+                <img src={{produto.imagem}} class=>
+                <h2>{{produto.descricao}}</h2>
+                <p>Estoque: {{produto.estoque}} </p>
+                <p>Preço: {{produto.preco}} </p>    
+                <ion-option-button class="button-assertive" ng-click="excluir(produto.$id)">
+                    Excluir
+                </ion-option-button>
+            </ion-item> 
+        </ion-list> 
+    </ion-content> -->
+
+</ion-view>

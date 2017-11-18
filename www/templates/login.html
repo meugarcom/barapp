@@ -1,0 +1,45 @@
+<!--<ion-view hide-nav-bar = "true">
+    <ion-content>
+<div id="botao" class="list CentralizarLogin">
+  <label class="item item-input item-stacked-label">
+    <span class="input-label">First Name</span>
+    <input type="text" placeholder="John">
+  </label>
+  <label class="item item-input item-stacked-label">
+    <span class="input-label">Last Name</span>
+    <input type="text" placeholder="Suhr">
+  </label>
+</div>
+
+<button class="button button-block button-energized">
+  Block Button
+</button>
+    </ion-content>
+</ion-view> -->
+
+<ion-view title="Bem vindo!"> <!--Barra escondida -->
+  
+    <ion-content>
+      
+      <form ng-submit="entrar(user)" name="form">
+  
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">E-mail</span>
+          <input type="email" placeholder="meucamarada@garcom.com" ng-model="user.email" required>
+        </label>
+  
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Senha </span>
+          <input type="password" placeholder="Senha" ng-minlength="6" ng-model="user.password" required>  
+        </label>
+  
+        <button ng-disabled="form.$invalid" class="button button-energized button-full">
+          Entrar
+        </button>
+  
+        <a href="#/registro" class="button button-energized button-full">
+          Registar
+        </a>
+      </form>
+    </ion-content>
+  </ion-view>

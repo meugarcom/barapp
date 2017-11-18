@@ -135,8 +135,8 @@ app.controller('LoginCtrl', function($scope, $state, $firebaseAuth, $ionicPopup)
     })
     .catch(function(error){
       //ocorreu um erro no login
-       $ionicPopUp.alert({title:'', message:''})
-       alert(error.message);
+      //  $ionicPopUp.alert({title:'', message:''})
+      //  alert(error.message);
 
       $ionicPopup.alert({
         title: 'Falha no login',

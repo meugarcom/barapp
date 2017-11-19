@@ -1,11 +1,8 @@
-<ion-view title="Menu">
+<ion-view title={{produto.descricao}}>
 
     <ion-content>
-        <label class="item item-input">
-            <input type="text" placeholder="Pesquisar" ng-model="pesquisa.descricao">
-        </label>
 
-        <div class="list " ng-click="visualizar(produto)" ng-repeat="produto in produtos | filter : pesquisa | orderBy: 'descricao'">
+        <div class="form" >
             <a class="item item-thumbnail-left">
                 <img src={{produto.imagem}} >
                 <h2>{{produto.descricao}}</h2>

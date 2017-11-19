@@ -31,12 +31,6 @@ app.config(function($stateProvider, $urlRouterProvider){
     controller: 'LoginCtrl'
   });
 
-  $stateProvider.state('menu', {
-    abstract: true,
-    url: '/menu',
-    templateUrl: '/templates/menu.html',
-    controller: 'AuthCtrl'
-  });
 
   $stateProvider.state('registro', {
     url: '/registro',
@@ -44,6 +38,18 @@ app.config(function($stateProvider, $urlRouterProvider){
     controller: 'RegistroCtrl'
   });
 
+  $stateProvider.state('produto', {
+    url: '/produto',
+    templateUrl: 'templates/produto.html',
+    controller: 'ProdutoCtrl'
+  });
+
+  $stateProvider.state('menu', {
+    abstract: true,
+    url: '/menu',
+    templateUrl: '/templates/menu.html',
+    controller: 'AuthCtrl'
+  });
   
   $stateProvider.state('menu.listaProdutos',{
     url: '/listaProdutos',
@@ -74,7 +80,6 @@ app.config(function($stateProvider, $urlRouterProvider){
       controller: 'cadastroProdutosCtrl'
       }
     }
-
   });
 
   
@@ -199,11 +204,21 @@ app.controller('listaProdutosCtrl', function($scope, $firebaseArray, $state){ //
     $scope.produtos.$remove(obj);
   }
 
+  $scope.visualizar = function(){
+    $state.go('produto')
+
+  }
+
+
 });
 
 app.controller('mesaCtrl', function($scope, $firebaseArray, $state){
   var ref = firebase.database().ref().child('ItensPedido');
   $scope.itenspedidos = $firebaseArray(ref);
+});
+
+app.controller('ProdutoCtrl', function($scope, $firebaseArray, $state, $firebaseObject){
+
 });
 
 app.controller('cadastroProdutosCtrl', function($scope, $firebaseArray, $firebaseObject, $state){

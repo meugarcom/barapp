@@ -5,7 +5,7 @@
             <input type="text" placeholder="Pesquisar" ng-model="pesquisa.descricao">
         </label>
 
-        <div class="list " ng-click="visualizar(produto)" ng-repeat="produto in produtos | filter : pesquisa | orderBy: 'descricao'">
+        <div class="list " ng-repeat="produto in produtos | filter : pesquisa | orderBy: 'descricao'" ng-click="visualizar(produto.$id)">
             <a class="item item-thumbnail-left">
                 <img src={{produto.imagem}} >
                 <h2>{{produto.descricao}}</h2>

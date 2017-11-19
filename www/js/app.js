@@ -39,7 +39,7 @@ app.config(function($stateProvider, $urlRouterProvider){
   });
 
   $stateProvider.state('produto', {
-    url: '/produto',
+    url: '/produto/:idProduto',
     templateUrl: 'templates/produto.html',
     controller: 'ProdutoCtrl'
   });
@@ -204,8 +204,9 @@ app.controller('listaProdutosCtrl', function($scope, $firebaseArray, $state){ //
     $scope.produtos.$remove(obj);
   }
 
-  $scope.visualizar = function(){
-    $state.go('produto')
+  $scope.visualizar = function(id){
+    console.log(id);
+    $state.go('produto', {idProduto : id})
 
   }
 
@@ -217,8 +218,11 @@ app.controller('mesaCtrl', function($scope, $firebaseArray, $state){
   $scope.itenspedidos = $firebaseArray(ref);
 });
 
-app.controller('ProdutoCtrl', function($scope, $firebaseArray, $state, $firebaseObject){
+app.controller('ProdutoCtrl', function($scope, $firebaseArray, $state, $firebaseObject, $stateParams){
+  var idProduto = $stateParams.idProduto;
 
+  var ref = firebase.database().ref("Produtos").child(idProduto);
+  $scope.item = $firebaseObject(ref);
 });
 
 app.controller('cadastroProdutosCtrl', function($scope, $firebaseArray, $firebaseObject, $state){

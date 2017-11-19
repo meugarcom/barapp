@@ -1,14 +1,25 @@
-<ion-view title={{produto.descricao}}>
+        <div class="bar bar-header bar-energized" >
+            <h1 class="title">{{item.descricao}}</h1>
+            <button class="button-icon ion-arrow-left-c" ui-sref="menu.listaProdutos">
+                Voltar
+            </button> 
+        </div>
 
     <ion-content>
 
-        <div class="form" >
-            <a class="item item-thumbnail-left">
-                <img src={{produto.imagem}} >
-                <h2>{{produto.descricao}}</h2>
-                <p>Estoque: {{produto.estoque}} </p>
-                <p>Preço: {{produto.preco}} </p>
-            </a>
+        <div class="list card">
+
+        <div class="item item-body">
+            <img class="full-image" src="{{item.imagem}}">
+            <p> {{item.descricao}} </p>
+            <p>
+                <a class="subdued">Estoque: {{item.estoque}}</a>
+            </p>
+            <p>
+                <a class="subdued">Preço: {{item.preco}}</a>
+            </p>
         </div>
 
+        </div>
 </ion-view>
+

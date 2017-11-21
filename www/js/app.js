@@ -228,6 +228,9 @@ app.controller('mesaCtrl', function($scope, $firebaseArray, $state){
   $scope.itenspedidos = $firebaseArray(ref);
 });
 
+
+
+
 app.controller('ProdutoCtrl', function($scope, $firebaseArray, $state, $firebaseObject, $stateParams){
   var idProduto = $stateParams.idProduto;
 
@@ -243,9 +246,11 @@ app.controller('ProdutoCtrl', function($scope, $firebaseArray, $state, $firebase
   $scope.add = function(itenspedido){
     var ref = firebase.database().ref().child('ItensPedido');
     $firebaseArray(ref).$add(itenspedido);
+    
 
-    $state.go('menu.listaProdutos');
+    $state.go('menu.Mesa');
   }
+  
 });
 
 app.controller('cadastroProdutosCtrl', function($scope, $firebaseArray, $firebaseObject, $state){

@@ -2,16 +2,24 @@
 
     <ion-content>
         <label class="item item-input">
-            <input type="text" placeholder="Pesquisar" ng-model="pesquisa.descricao">
+            <input type="text" placeholder="Pesquisar" ng-model="pesquisa.descricao"></input>
         </label>
 
-        <div class="list " ng-repeat="produto in produtos | filter : pesquisa | orderBy: 'descricao'" ng-click="visualizar(produto.$id)">
+        <div class="list " ng-repeat="produto in produtos | filter : pesquisa | orderBy: 'descricao'" >
             <a class="item item-thumbnail-left">
-                <img src={{produto.imagem}} >
+                <img src={{produto.imagem}} ng-click="visualizar(produto.$id)">
                 <h2>{{produto.descricao}}</h2>
                 <p>Estoque: {{produto.estoque}} </p>
                 <p>Preço: {{produto.preco}} </p>
+                <button class="button ion-plus" ng-click="adicionarProduto(produto)"></button>
+                <button class="button ion-plus" ng-click="removerProduto(produto.$id)"></button>
+                <input type="text" ng-disabled="true" ng-model="qtdPedida"></input>
             </a>
+
         </div>
+
+        <button class="button ion-success" ng-click="atualizarPedido()">Fazer pedido</button>
+
+    </ion-content>
 
 </ion-view>

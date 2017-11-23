@@ -193,9 +193,34 @@ app.controller('RegistroCtrl', function($scope, $state, $firebaseAuth, $firebase
 
 
 
-app.controller('listaProdutosCtrl', function($scope, $firebaseArray, $state){ // Lista = Antigo TipodeprodutoCtrl
+app.controller('listaProdutosCtrl', function($scope, $rootScope, $firebaseArray, $state){ // Lista = Antigo TipodeprodutoCtrl
  //É necessário criar um novo Scope para trazer os dados dos produtos existente e
  //que foram incluídos através do $scope.produto
+  
+ var firebaseUser = firebase.auth().currentUser;
+
+ if ( !$rootScope.nroPedido ){
+    var ref = firebase.database().ref().child('Pedido');
+    var novopedido = {};
+    novopedido.abertura = Date();
+    novopedido.mesa = 1;
+    novopedido.pessoa = firebaseUser.uid;
+    $firebaseArray(ref).$add(novopedido).then(function(ret){
+      $rootScope.nroPedido = ret.path.o[1];
+    });
+ }
+  
+ 
+ $scope.produtosSelecionados = [];
+
+ $scope.ItemPedido = {};
+ $scope.ItemPedido.idproduto = -1;
+ $scope.ItemPedido.nomeproduto = '';
+ $scope.ItemPedido.pessoa = firebaseUser.uid;
+ $scope.ItemPedido.precototal = 0;
+ $scope.ItemPedido.precounitario = 0;
+ $scope.ItemPedido.quantidade = 0;
+
  var ref = firebase.database().ref().child('Produtos');
   $scope.produtos = $firebaseArray(ref);
   
@@ -210,11 +235,63 @@ app.controller('listaProdutosCtrl', function($scope, $firebaseArray, $state){ //
 
   }
 
+  $scope.adicionarProduto = function(produto){
+    var encontrou = false;
+    for( var i = 0; i < $scope.produtosSelecionados.length; i++){
+      var ItemPedido = $scope.produtosSelecionados[i];
+      if ( produto.$id === $scope.ItemPedido.idproduto){
+        ItemPedido.quantidade++;
+        ItemPedido.precototal = $scope.ItemPedido.precounitario * $scope.ItemPedido.quantidade;
+        encontrou = true;
+        break;
+      }
+    }
+
+    console.log(produto);
+    console.log(encontrou);
+    console.log($scope.produtosSelecionados);
+    
+    if ( !encontrou ) {
+      $scope.ItemPedido.idproduto = produto.$id;
+      $scope.ItemPedido.nomeproduto = produto.descricao;
+      $scope.ItemPedido.precounitario = produto.preco;
+      $scope.ItemPedido.precototal = produto.preco;
+      $scope.ItemPedido.quantidade = 1;
+      $scope.ItemPedido.pessoa = produto.descricao;
+      
+      $scope.produtosSelecionados.push($scope.ItemPedido);
+    }
+  }
+
+  $scope.removerProduto = function(id){
+    for( var i = 0; i < $scope.produtosSelecionados.length; i++){
+      $scope.ItemPedido = $scope.produtosSelecionados[i];
+      if ( id === $scope.ItemPedido.id){
+        $scope.ItemPedido.quantidade--;
+        $scope.ItemPedido.precototal = $scope.ItemPedido.precounitario * $scope.ItemPedido.quantidade;
+        break;
+      }
+    }
+    if ( $scope.ItemPedido.quantidade <= 0 ) {
+      $scope.produtosSelecionados.splice(i, 1);
+    }
+  }
+
+  $scope.atualizarPedido = function(){
+    console.log($rootScope.nroPedido);
+    var ref = firebase.database().ref('ItensPedido').child($rootScope.nroPedido);
+    
+    for( var i = 0; i < $scope.produtosSelecionados.length; i++){
+      $scope.ItemPedido = $scope.produtosSelecionados[i];
+      $firebaseArray(ref).$add($scope.ItemPedido);
+    }
+  }
 
 });
 
-app.controller('mesaCtrl', function($scope, $firebaseArray, $state){
-  var ref = firebase.database().ref().child('ItensPedido');
+app.controller('mesaCtrl', function($scope, $rootScope, $firebaseArray, $state){
+  console.log($rootScope.nroPedido);
+  var ref = firebase.database().ref('ItensPedido').child($rootScope.nroPedido);
   $scope.itenspedidos = $firebaseArray(ref);
 });
 

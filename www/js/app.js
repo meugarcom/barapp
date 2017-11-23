@@ -249,9 +249,9 @@ app.controller('listaProdutosCtrl', function($scope, $rootScope, $firebaseArray,
     var encontrou = false;
     for( var i = 0; i < $scope.produtosSelecionados.length; i++){
       var ItemPedido = $scope.produtosSelecionados[i];
-      if ( produto.$id === $scope.ItemPedido.idproduto){
+      if ( produto.$id === ItemPedido.idproduto){
         ItemPedido.quantidade++;
-        ItemPedido.precototal = $scope.ItemPedido.precounitario * $scope.ItemPedido.quantidade;
+        ItemPedido.precototal = ItemPedido.precounitario * ItemPedido.quantidade;
         encontrou = true;
         break;
       }
@@ -262,38 +262,51 @@ app.controller('listaProdutosCtrl', function($scope, $rootScope, $firebaseArray,
     console.log($scope.produtosSelecionados);
     
     if ( !encontrou ) {
-      $scope.ItemPedido.idproduto = produto.$id;
-      $scope.ItemPedido.nomeproduto = produto.descricao;
-      $scope.ItemPedido.precounitario = produto.preco;
-      $scope.ItemPedido.precototal = produto.preco;
-      $scope.ItemPedido.quantidade = 1;
-      $scope.ItemPedido.pessoa = produto.descricao;
+      var ItemPedido = {
+        idproduto : produto.$id,
+        nomeproduto : produto.descricao,
+        precounitario : produto.preco,
+        precototal : produto.preco,
+        quantidade: 1,
+        pessoa : produto.descricao
+      }
+      // $scope..idproduto = produto.$id;
+      // $scope.ItemPedido.nomeproduto = produto.descricao;
+      // $scope.ItemPedido.precounitario = produto.preco;
+      // $scope.ItemPedido.precototal = produto.preco;
+      // $scope.ItemPedido.quantidade = 1;
+      // $scope.ItemPedido.pessoa = produto.descricao;
       
-      $scope.produtosSelecionados.push($scope.ItemPedido);
+      $scope.produtosSelecionados.push(ItemPedido);
     }
   }
 
   $scope.removerProduto = function(id){
     for( var i = 0; i < $scope.produtosSelecionados.length; i++){
-      $scope.ItemPedido = $scope.produtosSelecionados[i];
-      if ( id === $scope.ItemPedido.id){
-        $scope.ItemPedido.quantidade--;
-        $scope.ItemPedido.precototal = $scope.ItemPedido.precounitario * $scope.ItemPedido.quantidade;
-        break;
+      var ItemPedido = $scope.produtosSelecionados[i];
+      if ( id === ItemPedido.idproduto){
+         if ( ItemPedido.quantidade == 1 ) {
+            $scope.produtosSelecionados.splice(i, 1);
+          }
+          else {
+            ItemPedido.quantidade--;
+            ItemPedido.precototal = ItemPedido.precounitario * ItemPedido.quantidade;
+           
+          }
+           break;
       }
     }
-    if ( $scope.ItemPedido.quantidade <= 0 ) {
-      $scope.produtosSelecionados.splice(i, 1);
-    }
+   
   }
 
   $scope.atualizarPedido = function(){
     console.log($rootScope.nroPedido);
-    var ref = firebase.database().ref('ItensPedido').child($rootScope.nroPedido);
+    // var ref = firebase.database().ref('ItensPedido').child($rootScope.nroPedido);
     
     for( var i = 0; i < $scope.produtosSelecionados.length; i++){
-      $scope.ItemPedido = $scope.produtosSelecionados[i];
-      $firebaseArray(ref).$add($scope.ItemPedido);
+      var ItemPedido = $scope.produtosSelecionados[i];
+      // $firebaseArray(ref).$add($scope.ItemPedido);
+      firebase.database().ref('ItensPedido').child($rootScope.nroPedido).child(ItemPedido.idproduto).update(ItemPedido);
     }
   }
 

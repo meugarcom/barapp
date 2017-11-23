@@ -256,11 +256,9 @@ app.controller('listaProdutosCtrl', function($scope, $rootScope, $firebaseArray,
         break;
       }
     }
-
     console.log(produto);
     console.log(encontrou);
     console.log($scope.produtosSelecionados);
-    
     if ( !encontrou ) {
       var ItemPedido = {
         idproduto : produto.$id,
@@ -276,9 +274,9 @@ app.controller('listaProdutosCtrl', function($scope, $rootScope, $firebaseArray,
       // $scope.ItemPedido.precototal = produto.preco;
       // $scope.ItemPedido.quantidade = 1;
       // $scope.ItemPedido.pessoa = produto.descricao;
-      
       $scope.produtosSelecionados.push(ItemPedido);
     }
+    $scope.ItemPedido.quantidade = ItemPedido.quantidade;
   }
 
   $scope.removerProduto = function(id){
@@ -287,6 +285,7 @@ app.controller('listaProdutosCtrl', function($scope, $rootScope, $firebaseArray,
       if ( id === ItemPedido.idproduto){
          if ( ItemPedido.quantidade == 1 ) {
             $scope.produtosSelecionados.splice(i, 1);
+
           }
           else {
             ItemPedido.quantidade--;
@@ -296,7 +295,7 @@ app.controller('listaProdutosCtrl', function($scope, $rootScope, $firebaseArray,
            break;
       }
     }
-   
+    $scope.ItemPedido.quantidade = ItemPedido.quantidade; 
   }
 
   $scope.atualizarPedido = function(){
@@ -308,6 +307,7 @@ app.controller('listaProdutosCtrl', function($scope, $rootScope, $firebaseArray,
       // $firebaseArray(ref).$add($scope.ItemPedido);
       firebase.database().ref('ItensPedido').child($rootScope.nroPedido).child(ItemPedido.idproduto).update(ItemPedido);
     }
+  $state.go('menu.Mesa');
   }
 
 });

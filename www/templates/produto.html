@@ -7,41 +7,20 @@
         </div>
 
     <ion-content>
-        <form ng-submit="add(itenspedido)">
             <div class="list card">
 
-            <div class="item item-body">
-                <img class="full-image" src="{{item.imagem}}">
-                <input type="text" > {{item.descricao}} </p>
-                <p >
-                    <a class="subdued"  ></a>Estoque: {{item.estoque}}</a>
-                </p>
-                <p>
-                    <a class="subdued">Preço: {{item.preco}}</a>
-                </p>
-
-                
-            </div>
-            <div class="card">
-                <div class="item item-text-wrap">
-                    <div class="input-label" >
-                        Quantidade:
-                    </div>
-                    <select ng-model="itenspedido.quantidade">
-                        <option selected>1</option>
-                        <option >2</option>
-                        <option>3</option>  
-                    </select>
-                    <button class="button button-balanced" ng-click="addProdutoPedido(produto.$id)">
-                        Adicionar ao pedido
-                    </button>
+                <div class="item item-body">
+                    <img class="full-image" src="{{item.imagem}}">
+                    <input type="text" > {{item.descricao}} </p>
+                    <p >
+                        <a class="subdued"  ></a>Estoque: {{item.estoque}}</a>
+                    </p>
+                    <p>
+                        <a class="subdued">Preço: {{item.preco}}</a>
+                    </p>                
                 </div>
-            </div>
 
-            </div>
-
-        </form>            
-    
+            </div>    
     </ion-content>
 </ion-view>
 

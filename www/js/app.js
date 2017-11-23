@@ -82,6 +82,16 @@ app.config(function($stateProvider, $urlRouterProvider){
     }
   });
 
+  $stateProvider.state('menu.itensPedido',{
+    url: '/itenspedido',
+    views: {
+      "conteudo":{  
+        templateUrl: '/templates/itenspedido.html',
+        controller: 'ItensPedidoCtrl'
+      }
+    }
+  });
+
   
 
   // INDICAR A TELA INICIAL DO APLICATIVO
@@ -295,11 +305,29 @@ app.controller('mesaCtrl', function($scope, $rootScope, $firebaseArray, $state){
   $scope.itenspedidos = $firebaseArray(ref);
 });
 
+
+
+
 app.controller('ProdutoCtrl', function($scope, $firebaseArray, $state, $firebaseObject, $stateParams){
   var idProduto = $stateParams.idProduto;
 
   var ref = firebase.database().ref("Produtos").child(idProduto);
   $scope.item = $firebaseObject(ref);
+
+
+ //Tentando inserir itenspedido
+
+  $scope.itenspedido = {};
+
+
+  $scope.add = function(itenspedido){
+    var ref = firebase.database().ref().child('ItensPedido');
+    $firebaseArray(ref).$add(itenspedido);
+    
+
+    $state.go('menu.Mesa');
+  }
+  
 });
 
 app.controller('cadastroProdutosCtrl', function($scope, $firebaseArray, $firebaseObject, $state){
@@ -323,6 +351,11 @@ app.controller('cadastroProdutosCtrl', function($scope, $firebaseArray, $firebas
   
  
 });
+
+
+app.controller('ItensPedidoCtrl', function($scope, $firebaseArray, $state){ 
+ 
+ });
 
 app.controller("AuthCtrl", function($scope, $firebaseObject, $firebaseAuth, $state, $ionicPopup) {
 

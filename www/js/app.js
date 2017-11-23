@@ -276,7 +276,6 @@ app.controller('listaProdutosCtrl', function($scope, $rootScope, $firebaseArray,
       // $scope.ItemPedido.pessoa = produto.descricao;
       $scope.produtosSelecionados.push(ItemPedido);
     }
-    $scope.ItemPedido.quantidade = ItemPedido.quantidade;
   }
 
   $scope.removerProduto = function(id){
@@ -295,7 +294,6 @@ app.controller('listaProdutosCtrl', function($scope, $rootScope, $firebaseArray,
            break;
       }
     }
-    $scope.ItemPedido.quantidade = ItemPedido.quantidade; 
   }
 
   $scope.atualizarPedido = function(){

@@ -15,12 +15,20 @@
             </div>           
                 <button class="button ion-plus" ng-click="adicionarProduto(produto)" style="background-color:#ffc900"></button>
                 <button class="button ion-minus" ng-click="removerProduto(produto.$id)" style="background-color: #ef473a"></button>
-                <input type="text" ng-disabled="true" ng-model="qtdPedida"></input>
+                <input type="text" ng-disabled="true" ng-model="ItemPedido.quantidade"></input>
             </a>
         </div>
 
-        <button class="button ion-success" ng-click="atualizarPedido()">Fazer pedido</button>
+        <!--<button class="button ion-success" ng-click="atualizarPedido()">Fazer pedido</button>-->
+        
+        
 
     </ion-content>
+
+    <div class="bar bar-footer bar-balanced">
+        <button class="button button-clear" ng-click="atualizarPedido()">Fazer Pedido</button>
+        <button class="button button-clear" >Total:</button>
+    </div>
+    
 
 </ion-view>
